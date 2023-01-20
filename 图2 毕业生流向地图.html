@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document </title>
+
+    <!-- CSS Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.3.1/pyLDAvis/js/ldavis.v1.0.0.css">
+
+    <!-- bootstrap scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <script src="https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="echarts-4.2.1-rc1-map_js_china.js"></script>
+
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="chart6"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart6 = echarts.init(document.getElementById('chart6'));
+
+        option = {
+            title: {
+                text: '2021年全国各省份应届生生流向图',
+                top: '3%',
+                textAlign: 'center',
+                left: '50%',
+                textStyle: {
+                    color: '#002357',
+                    fontSize: 20,
+
+                },
+            },
+            legend: {
+                orient: 'horizontal',//图例的排列方向
+                x: 'left',//图例的位置
+                data: ['人口数量']
+            },
+            backgroundColor: 'white',
+            tooltip: {
+                trigger: 'item'
+            },
+
+            //左侧小导航图标
+            visualMap: {
+                show: true,
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    { start: -10, end: -5 }, { start: -5, end: 0 },
+                    { start: 0, end: 5 }, { start: 5, end: 10 },
+                    { start: 10, end: 20 }
+                ],
+
+                color: [
+                    '#FC8E01',
+                    '#FFD802',
+                    '#F0E593',
+                    '#97D8ED',
+
+
+                    '#0BB7BA',
+
+
+                ],// e6ac53 '#9fb5ea'
+                textStyle: {
+
+                    color: '#black'
+
+                }
+            },
+
+            geo: {
+
+                map: 'china',
+
+                aspectScale: 0.75,
+
+                layoutCenter: ["10%", "51.5%"], //地图位置
+
+                layoutSize: '0%',
+
+                roam: true, //关闭缩放
+
+                itemStyle: {
+
+                    normal: {
+
+                        borderColor: 'rgba(147, 235, 248, 1)',
+
+                        borderWidth: 0.5,
+
+                        color: {
+
+                            type: 'linear-gradient',
+
+                            x: 0,
+
+                            y: 1500,
+
+                            x2: 2500,
+
+                            y2: 0,
+
+                            colorStops: [{
+
+                                offset: 0,
+
+                                color: '#009DA1' // 0% 处的颜色
+
+                            }, {
+
+                                offset: 1,
+
+                                color: '#005B9E' // 50% 处的颜色
+
+                            }],
+
+                            global: false // 缺省为 false
+
+                        },
+
+                        opacity: 0.5,
+
+                    },
+
+                    emphasis: {
+
+                        areaColor: '#2a333d'
+
+                    }
+
+                },
+
+                regions: [{
+
+                    name: '南海诸岛',
+
+                    itemStyle: {
+
+                        areaColor: 'rgba(0, 10, 52, 1)',
+
+                        borderColor: 'rgba(0, 10, 52, 1)'
+
+                    },
+
+                    emphasis: {
+
+                        areaColor: 'rgba(0, 10, 52, 1)',
+
+                        borderColor: 'rgba(0, 10, 52, 1)'
+
+                    }
+
+                }],
+
+                z: 2
+
+            },
+
+            series: [{
+                name: '净流入应届生数（单位：万人)',
+                type: 'map',
+
+                map: 'china',
+
+
+
+                label: {
+
+                    show: false,
+
+                    color: 'black',
+
+                    fontSize: 14
+
+                },
+
+                aspectScale: 0.75,
+
+                layoutCenter: ["50%", "50%"], //地图位置
+
+                layoutSize: '100%',
+
+                roam: false, //关闭缩放
+
+                itemStyle: {
+
+                    normal: {
+
+                        borderColor: 'rgba(147, 235, 248, 0.6)',
+
+                        borderWidth: 0.8,
+
+                        areaColor: {
+
+                            type: 'linear-gradient',
+
+                            x: 0,
+
+                            y: 1200,
+
+                            x2: 1000,
+
+                            y2: 0,
+
+                            colorStops: [{
+
+                                offset: 0,
+
+                                color: '#009DA1' // 0% 处的颜色
+
+                            }, {
+
+                                offset: 1,
+
+                                color: '#005B9E' // 50% 处的颜色
+
+                            }],
+
+                            global: true // 缺省为 false
+
+                        },
+
+                    },
+
+                    emphasis: {
+
+                        areaColor: 'rgba(147, 235, 248, 0)'
+
+                    }
+
+                },
+
+                zlevel: 1,
+                data: [
+                    { name: '北京', value: 7.15 },
+                    { name: '天津', value: -3.41 },
+                    { name: '上海', value: 6.41 },
+                    { name: '重庆', value: -1.1 },
+                    { name: '河北', value: -5.65 },
+                    { name: '河南', value: -5.71 },
+                    { name: '云南', value: -5.89 },
+                    { name: '辽宁', value: -1.13 },
+                    { name: '黑龙江', value: -5.65 },
+                    { name: '湖南', value: -4.59 },
+                    { name: '安徽', value: -1.89 },
+                    { name: '山东', value: -1.57 },
+                    { name: '新疆', value: -0.84 },
+                    { name: '江苏', value: -2.54 },
+                    { name: '浙江', value: 5.21 },
+                    { name: '江西', value: -5.74 },
+                    { name: '湖北', value: -8.44 },
+                    { name: '广西', value: -3.39 },
+                    { name: '甘肃', value: -3.81 },
+                    { name: '山西', value: -0.43 },
+                    { name: '内蒙古', value: -1.8 },
+                    { name: '陕西', value: -3.46 },
+                    { name: '吉林', value: -3.82 },
+                    { name: '福建', value: -1.4 },
+                    { name: '贵州', value: -3.91 },
+                    { name: '广东', value: 14.54 },
+                    { name: '青海', value: 0.08 },
+                    { name: '西藏', value: -0.45 },
+                    { name: '四川', value: -0.6 },
+                    { name: '宁夏', value: -0.43 },
+                    { name: '海南', value: -0.56 },
+                ],
+
+
+            }],
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart6.setOption(option);
+    </script>
+
+</body>
+
+</html>

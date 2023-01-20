@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>租房关注因素图</title>
+    <style>
+        .box{
+            width: 700px;
+            height: 700px;
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+	<!-- 2.准备具有大小的DOM容器 -->
+    <div class="box"></div>
+
+    <script src="js/echarts.min.js"></script>
+    <script>
+        //3.初始化实例对象 echarts.init(dom容器)
+        var myChart = echarts.init(document.querySelector(".box"));
+
+        var option = {
+            title: {
+                text: '高校毕业生租房时关注因素',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#002357'
+                }
+            },
+            legend: {
+                top: 'bottom'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                restore: { show: true },
+                saveAsImage: { show: true }
+                }
+            },
+            series: [
+                {
+                    name: 'Nightingale Chart',
+                    type: 'pie',
+                    radius: [50, 250],
+                    center: ['50%', '50%'],
+                    roseType: 'area',
+                    itemStyle: {
+                        borderRadius: 8
+                    },
+                    data: [
+                        { value: 35, name: '交通情况', itemStyle: { color: '#0024b3' } },
+                        { value: 34, name: '房屋安全性', itemStyle: { color: '#0029cc' } },
+                        { value: 34, name: '地理位置', itemStyle: { color: '#002ee6' } },
+                        { value: 31, name: '租金价格', itemStyle: { color: '#0033ff' } },
+                        { value: 29, name: '租房合同的合规性', itemStyle: { color: '#1a47ff' }},
+                        { value: 27, name: '房屋配套设施', itemStyle: { color: '#335cff' } },
+                        { value: 27, name: '住宅区环境', itemStyle: { color: '#4d70ff' } },
+                        { value: 25, name: '周边配套商业区', itemStyle: { color: '#ffe889' } },
+                        { value: 23, name: '房屋装修情况', itemStyle: { color: '#ffe063' } },
+                        { value: 22, name: '押付方式', itemStyle: { color: '#ffd83a' } },
+                        { value: 17, name: '物业服务', itemStyle: { color: '#ffd427' } },
+                        { value: 16, name: '房型', itemStyle: { color: '#ffd013' } },
+                        { value: 15, name: '户型', itemStyle: { color: '#ffcc00' } }
+                    ]
+                }
+            ]
+        };
+        // 4.3 更新配置
+		myChart.setOption(option);
+		// chart图表，set设置 Option选项  data数据 type类型 bar条（柱状条），series系列（数据） Axis轴线 xAxis水平轴线 
+		// legend传奇（图例） tooltip 提示 init初始化 document文档 
+	</script>
+</html>

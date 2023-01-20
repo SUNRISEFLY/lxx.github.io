@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>第一个 ECharts 实例</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 700px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var uploadedDataURL = "https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json";
+
+        let xaxisData = ["2012年","2013年","2014年","2015年","2016年", "2017年", "2018年", "2019年", "2020年", "2021年", "2022年"];
+let yaxisData = [680,699,727,749,756, 795, 820, 834, 874, 909, 1076];
+let animationData = [["2012年",680],["2013年",699],["2014年",727],["2015年",749],["2016年", 756], ["2017年", 795], ["2018年", 820], ["2019年", 834], ["2020年", 874], ["2021年", 909], ["2022年", 1076]]
+
+option = {
+   title: {
+    text: '2012-2022年全国高校毕业生人数',
+    top: '4%',
+    textAlign: 'center',
+    left: '49.5%',
+    textStyle: {
+      color: '#97D8ED',
+      fontSize: 22,
+      
+    },
+    },
+   backgroundColor: "#002357",
+   grid: {
+      top: "15%",
+      left: "1%",
+      right: "1%",
+      bottom: "1%",
+      containLabel: true,
+   },
+   tooltip: {
+      trigger: "axis",
+      confine: true,
+      backgroundColor: "rgba(255, 132, 90, 0.3)",
+      borderColor: "#97D8ED",
+      extraCssText: "box-shadow: 2px 2px 4px 0px rgba(255, 132, 90, 0.3);",
+      textStyle: {
+         fontSize: 16,
+         color: "#fff",
+         fontFamily: "PangMenZhengDao",
+      },
+      formatter: (params, ticket, callback) => {
+         const item = params[0];
+         return '毕业生人数' + "<br/>" + item.name + "：" + item.value + " 万人";
+      },
+      axisPointer: {
+         type: "line",
+         lineStyle: {
+            color: "#FF845A",
+         },
+      },
+   },
+   xAxis: {
+      data: xaxisData,
+      boundaryGap: true,
+      axisLine: {
+         show: true,
+         symbol: ["none", "rect"],
+         symbolSize: [6, 12],
+         lineStyle: {
+            width: 2,
+            color: "#97D8ED",
+         },
+      },
+      axisTick: {
+         show: false,
+      },
+   },
+   yAxis: {
+      name: "(单位：万人)",
+      nameTextStyle: {
+         color: "#97D8ED",
+         fontWeight: 400,
+         fontSize: 14,
+      },
+      axisLabel: {
+         color: "#97D8ED",
+      },
+       interval: 100,
+       min: 500,
+      
+      axisLine: {
+         show: true,
+         symbol: ["none", "rect"],
+         symbolSize: [6, 12],
+         lineStyle: {
+            width: 2,
+            color: "#97D8ED",
+         },
+      },
+      axisTick: {
+         show: false,
+      },
+      splitLine: {
+         show: true,
+         lineStyle: {
+            color: "rgba(83, 125, 170, 0.2)",
+         },
+      },
+   },
+   series: [
+      {
+         type: "line",
+         // smooth: true,
+         lineWidth: 1.2,
+         data: yaxisData,
+         symbol: "none",
+         itemStyle: {
+            color: "rgba(114, 178, 255, 1)",
+         },
+         lineStyle: {
+            width: 5,
+            shadowBlur: 20,
+            shadowColor: "#72B2FF",
+            shadowOffsetY: 10,
+         },
+         areaStyle: {
+            color: new echarts.graphic.LinearGradient(
+               0,
+               0,
+               0,
+               1,
+               [
+                  {
+                     offset: 0,
+                     color: "rgba(114, 178, 255, 0.25)",
+                  },
+                  {
+                     offset: 1,
+                     color: "rgba(114, 178, 255, 0)",
+                  },
+               ],
+               false
+            ),
+            opacity: 1,
+         },
+      },
+      {
+         type: "lines",
+         coordinateSystem: "cartesian2d",
+         data: [{
+            coords: animationData
+         }],
+         zlevel: 1,
+         polyline: true,
+         symbol: "circle",
+         effect:
+         {
+            show: true,
+            trailLength: 0.4,
+            symbol: "circle",
+            period: 8,
+            symbolSize: 8
+         },
+         lineStyle:
+         {
+            normal:
+            {
+               color: '#64FFFF',
+               width: 0,
+               opacity: 0,
+               curveness: 0
+            }
+         }
+      },
+   ],
+};
+
+
+        // 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+    </script>
+</body>
+</html>

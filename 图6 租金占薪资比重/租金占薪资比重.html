@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>租金占薪资比重</title>
+  <style>
+    .box{
+      width: 500px;
+      height: 500px;
+      background-color: rgb(255, 255, 255);
+    }
+  </style>
+</head>
+<body>
+	<!-- 2.准备具有大小的DOM容器 -->
+  <div class="box"></div>
+
+  <script src="js/echarts.min.js"></script>
+  <script>
+        //3.初始化实例对象 echarts.init(dom容器)
+    var myChart = echarts.init(document.querySelector(".box"));
+        //4.指定配置项和数据
+		var option = {
+			// 调色盘
+			// color:["#55aaff","#aaff7f","#55007f","#ffff00"],
+			// 图表的标题
+      title: {
+        text: '高校毕业生租金占薪资比重',
+          left: 'center',
+          top: 20,
+          textStyle: {
+          color: '#002357'
+          }
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        bottom: '5%',
+        left: 'center'
+      },
+      series: [
+        {
+          name: '高校毕业生租金占薪资比重',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: '#fff',
+            borderWidth: 2 
+          },
+          label: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 40,
+              fontWeight: 'bold'
+            }
+          },
+          labelLine: {
+            show: false
+          },
+          data: [
+            { value: 11.9, name: '10%以下', itemStyle: {color:'#051181'} },
+            { value: 45.0, name: '10%-20%', itemStyle: {color:'#0000A1'} },
+            { value: 30.2, name: '20%-30%', itemStyle: {color:'#1F6ED4'} },
+            { value: 8.3, name: '30%-40%', itemStyle: {color:'#39BAE8'} },
+            { value: 9.7, name: '40%以上', itemStyle: {color:'#B9EDF8'} }
+          ]
+        }
+      ]
+     };
+
+		// 4.3 更新配置
+		myChart.setOption(option);
+		// chart图表，set设置 Option选项  data数据 type类型 bar条（柱状条），series系列（数据） Axis轴线 xAxis水平轴线 
+		// legend传奇（图例） tooltip 提示 init初始化 document文档 
+	</script>
+</html>
